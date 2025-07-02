@@ -1,0 +1,122 @@
+<%- include("./partials/header.ejs") %>
+
+<div>
+<% if(user){ %>
+    <div>
+        <h2 style="margin-top: 40px;">
+           <%= book ? "Update your entry": "Add new book" %>
+        </h2>
+    </div>
+<form action="/books/<%= user.username %>/<%= book ? book.id+'/edit' : 'add' %>" method="POST" class="p-4">
+
+  <!-- H5 and ISBN in the same line -->
+  <div class="row align-items-center mb-3">
+    <div class="col-md-7">
+      <h5>You can fetch info by normally filling isbn no. (written above QR code of book)</h5>
+    </div>
+    <div class="col-md-3">
+      <label for="isbn" class="form-label">ISBN</label>
+      <input type="text" class="form-control" id="isbn" name="isbn" value="<%= book?.isbn || '' %>">
+    </div>
+    <div class="col-md-2">
+      <button type="button" class="btn btn-secondary" onclick="autofillBookInfo()">Fetch Book Info</button> 
+    </div>
+  </div>
+
+  <!-- Title and Author on the same line -->
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <label for="title">Book Title</label>
+      <input type="text" class="form-control" name="title" id="title" value="<%= book?.title || '' %>">
+    </div>
+    <div class="col-md-6">
+      <label for="author">Author</label>
+      <input type="text" class="form-control" name="author" id="author" value="<%= book?.author || '' %>">
+    </div>
+  </div>
+
+  <!-- Image URL -->
+  <div class="row mb-3">
+    <div class="col-md-5">
+      <label for="image_url" class="form-label">Image URL</label>
+      <input type="url" class="form-control" id="image_url" name="image_url" value="<%= book?.image_url || '' %>">
+    </div>
+    <div class="col-md-4">
+      <label for="date_read" class="form-label">Date Read</label>
+      <input type="date" class="form-control" id="date_read" name="date_read" value="<%= book?.date_read || '' %>">
+    </div>
+    <div class="col-md-3">
+      <label for="rating" class="form-label">Rating (out of 5)</label>
+      <input type="number" class="form-control" id="rating" name="rating" min="1" max="5" value="<%= book?.rating || '' %>">
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <label for="description" class="form-label">Description</label>
+      <textarea class="form-control" id="description" name="description" rows="7"><%= book?.description || '' %></textarea>
+    </div>
+
+    <div class="col-md-6">
+      <label for="short_review" class="form-label">Short Review</label>
+      <textarea class="form-control" id="short_review" name="short_review" rows="7"><%= book?.short_review || '' %></textarea>
+    </div>
+  </div>
+
+
+  <!-- Short Note -->
+  <div class="mb-3">
+    <label for="short_note">Personal Note</label>
+    <textarea class="form-control" name="short_note"><%= book?.short_note || '' %></textarea>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Save</button>
+</form>
+    <script>
+      async function autofillBookInfo() {
+        const isbnInput = document.getElementById('isbn');
+        const authorInput = document.getElementById('author');
+        const titleInput = document.getElementById('title');
+        const imageInput = document.getElementById('image_url');
+        const descriptionInput = document.getElementById('description');
+
+        const isbn = isbnInput.value.trim();
+        if (!isbn) {
+          alert("Please enter an ISBN first.");
+          return;
+        }
+        try {
+          const res = await fetch(`/books/fetch-info?isbn=${isbn}`);
+
+          if (!res.ok) {
+            const errorData = await res.json();
+            alert(errorData.error || "Book not found.");
+            return;
+          }
+
+          const data = await res.json();
+          console.log("Fetched book data:", data);
+
+          if (data.title) titleInput.value = data.title;
+          if (data.author) authorInput.value = data.author;
+          if (data.image_url) imageInput.value = data.image_url;
+          if (data.description) descriptionInput.value = data.description;
+
+        } catch (err) {
+          console.error("Error fetching book info:", err);
+          alert("Something went wrong while fetching book data.");
+        }
+      }
+    </script>
+   
+<% } else { %>
+  <h1>Go and Register first</h1>
+<% } %>
+</div>
+
+
+
+
+
+
+<%- include("./partials/footer.ejs") %>

@@ -1,0 +1,46 @@
+<%- include("./partials/header.ejs") %>
+<style>
+      body {
+    background: linear-gradient(to right, #f7f1e3, #dcdde1);
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+    background-image: url(https://img.freepik.com/free-vector/flat-background-world-book-day-celebration_23-2150183373.jpg?semt=ais_hybrid&w=740);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+</style>
+
+<div class="register-wrapper">
+  <div class="register-card">
+    <h2>Register</h2>
+
+    <form action="/register" method="POST">
+      <div class="mb-2">
+        <label for="username" class="form-label">Username</label>
+        <input type="username" name="username" class="form-control" required>
+      </div>
+      <div class="mb-2">
+        <label for="email" class="form-label">Email Address</label>
+        <input type="email" name="email" class="form-control" required>
+      </div>
+
+      <div class="mb-4">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" name="password" class="form-control" required>
+      </div>
+      <hr>
+
+      <button type="submit" class="btn btn-login">Register</button>
+
+      <a href="/login" class="btn btn-outline-secondary btn-register">Old user here? Login</a>
+    </form>
+
+    <a href="/auth/google" class="btn google-btn mt-3">
+      <i class="fab fa-google me-2"></i> Sign up with Google
+    </a>
+  </div>
+</div>
+
+
+<%- include("./partials/footer.ejs") %>

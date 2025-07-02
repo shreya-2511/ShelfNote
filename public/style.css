@@ -1,0 +1,218 @@
+.bookCover img{
+   height: 280px;
+   width: 180px;   
+}
+
+  body {
+    background: linear-gradient(to right, #f7f1e3, #dcdde1);
+    background-image: url('https://png.pngtree.com/background/20210717/original/pngtree-green-clean-texture-book-cartoon-background-picture-image_1429522.jpg');
+    font-family: 'Segoe UI', sans-serif;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  .navbar{
+    background-color: #2f3542;
+    padding: 5px 20px;
+    display:flex;
+    top: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    height: 40px;
+    justify-content: flex-start;
+    align-content: center;
+    font-size: 2rem;
+  }
+  .navbar img{
+    height: 30px;
+    width: 30px;
+    margin-right: 10px;
+  }
+  .navbar a {
+    color: rgba(255, 255, 255, 0.889);
+    text-decoration: none;
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 600;
+  }
+
+  .login-wrapper ,.register-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .login-card, .register-card {
+    background-color: #ffffffc7;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 10px 30px rgba(0, 0, 1, 1);
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+
+  }
+
+  .login-card h2, .register-card h2 {
+
+    font-weight: 600;
+    color: #2d3436;
+    margin-bottom: 20px;
+    text-align: center;
+    text-decoration-line: underline;
+    font-family: "Edu NSW ACT Hand Pre", cursive;
+    
+  }
+
+  .form-label {
+    font-weight: 600;
+    color: #2d3436;
+    margin-bottom: 0;
+  }
+
+  .form-control {
+    border-radius: 10px;
+    border: 1px solid #ced6e0;
+    display: inline;
+    /* display: flex; */
+  }
+
+  .btn-login {
+    background-color: #2f3542;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    transition: 0.3s ease-in-out;
+    width: 100%;
+  }
+
+  .btn-login:hover {
+    background-color: #868686;
+  }
+
+  .btn-register {
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 10px;
+    color: #3c414c;
+  }
+
+  .google-btn {
+    background-color: #db4537;
+    color: white;
+    font-weight: bold;
+    width: 80%;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    
+  }
+
+  .google-btn:hover {
+    background-color: #b51702;
+    color: white;
+
+  }
+
+  .footer-text {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #636e72;
+  }
+
+  a {
+    text-decoration: none;
+    color: #0984e3;
+  }
+
+
+             /* Book.ejs */
+
+.viewpage {
+  display: flex;
+  height: 100vh;
+  margin-top: 40px;
+  overflow-x: hidden; 
+  justify-content: space-between;
+}
+
+.profile {
+  height: 100vh;
+  background-color: #6d9ca2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 20px;
+  padding-top: 50px;
+  color: white;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.booklist {
+  margin-left: 27%; 
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden; 
+  padding: 20px;
+  background-image: url('https://media.istockphoto.com/id/470721440/vector/books-seamless-pattern.jpg?s=612x612&w=0&k=20&c=SBWwuWALkou5kDTDq6_V7SGuBMJ4vxTK3y15B9ZSFDE=');
+  background-size: cover;
+  background-repeat: repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  scroll-behavior: smooth;
+}
+
+
+.bookCard{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    background-color: #f7f1e3;
+    height: fit-content;
+    margin: 20px;
+    border-radius: 30px;
+    padding: 3rem;
+    box-shadow: rgb(169, 169, 169)  8px 10px 10px ;
+    border: 2px solid rgb(145, 145, 145);
+}
+
+
+@media (max-width: 1024px) {
+  .profile {
+    display: none;
+    
+  }
+    .viewpage {
+    flex-direction: column;
+  }
+
+  .booklist {
+    width: 100%;
+    margin-left: 0; /* Reset left margin from desktop view */
+    height: auto;   /* Allow natural height on smaller screens */
+    overflow-y: auto;
+    padding: 1rem;
+  }
+  .bookCard{
+    padding: 2rem;
+  }
+}
+
+@media (max-width:425px){
+    .bookCard{
+        padding: 1.5rem;
+        width: 95%;
+    }
+}
+

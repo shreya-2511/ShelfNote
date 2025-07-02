@@ -1,0 +1,38 @@
+<%- include("./partials/header.ejs") %>
+   <% if(book){ %>
+    <div class="bookCard border rounded p-3 mb-4 mt-5">
+        <div class="row">
+            <div class="col-md-3 text-center bookCover">
+            <img src="<%= book.image_url %>" alt="Book Cover" class="img-fluid rounded shadow" >
+            </div>
+
+            <div class="col-md-9">
+                <h3><%= book.title %></h3>
+                <p><strong>Author:</strong> <%= book.author %></p>
+                <p><strong>Date Read:</strong> <%= book.date_read %></p>
+                <p><strong>Rating:</strong> <%= book.rating %> / 5</p>
+                <p><strong>ISBN:</strong> <%= book.isbn %></p>
+                <a class="btn btn-secondary" href='/books/<%= user.username %>/<%= book.id %>/edit'">Edit</a>
+                <a class="btn btn-danger" href='/books/<%= user.username %>/<%= book.id %>/delete'">Delete</a>
+            </div>       
+
+        <!-- Bottom: Description -->
+        <div class="mt-3">
+            <strong>Description:</strong>
+            <p><%= book.description %></p>
+        </div>
+        <div class="mt-3">
+            <strong>Review:</strong>
+            <p><%= book.short_review %></p>
+        </div>
+        <div class="mt-3">
+            <strong>Note:</strong>
+            <p><%= book.short_note %></p>
+        </div>
+    </div>
+    <% } else { %>
+        <h1>No book found</h1>
+    <% } %>
+ 
+
+<%- include("./partials/footer.ejs") %>

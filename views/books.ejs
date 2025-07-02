@@ -1,0 +1,92 @@
+<%- include("./partials/header.ejs") %>
+
+<% if (user) { %>
+  <div class="viewpage row">
+    <div class="profile col-md-3">
+      <!-- <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Enable both scrolling & backdrop</button> -->
+
+      <!-- <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+        <a class="btn btn-light btn-lg" href="/books/<%= user.username %>/add" role="button">Add a new Book</a>
+        <a class="btn btn-light btn-lg" href="/logout" role="button">Log Out</a>
+        <a class="btn btn-light btn-lg" href="/" role="button">Home</a>
+      </div> -->
+      <h1>Hello <%= user.username %> 😊</h1><br>
+      <div class="d-flex row ">
+        <a class="btn btn-primary " href="/books/<%= user.username %>/add" role="button">📚 Add a new Book</a>
+        <a class="btn btn-danger " href="/logout" role="button">🚪 Log Out</a>
+        <a class="btn btn-secondary" href="/" role="button">🏠 Home</a>
+        <button type="button" class="btn btn-warning" onclick="toggleEdit()">✏️ Edit Details</button>
+      </div>
+        <form action="/books/<%= user.username %>/update" method="POST" style="display:none;" id="editForm">
+          <div class="mb-2">
+            <label for="username">Username</label>
+            <input type="text" name="username" class="form-control" value="<%= user.username %>" required>
+          </div>
+          <div class="mb-2">
+            <label for="email">Email</label>
+            <input type="email" name="email" class="form-control" value="<%= user.email %>" required>
+          </div>
+          <button type="submit" class="btn btn-primary btn-sm">Update</button>
+        </form>
+          <script>
+            function toggleEdit() {
+              const form = document.getElementById("editForm");
+              form.style.display = (form.style.display === "none" || form.style.display === "") ? "block" : "none";
+            }
+          </script>     
+      <%- include("./partials/footer.ejs") %>
+    </div>
+
+    <div class="booklist col-md-9">
+      <% if (bookList.length === 0) { %>
+          <p>No books added yet.</p>
+      <% } else { %>
+        <br>
+        <h2>Your Book List</h2>
+        <% bookList.forEach(book => { %> 
+          <div class="bookCard border rounded p-3">
+            <div class="row">
+              <!-- Left: Book Cover -->
+              <div class="col-md-3 text-center">
+                <img src="<%= book.image_url %>" alt="Book Cover" class="img-fluid rounded shadow" style="max-height: 200px;">
+              </div>
+
+              <!-- Right: Book Info -->
+              <div class="col-md-9">
+                <h3>
+                  <a href="/books/<%= user.username %>/<%= book.id %>">
+                    <%= book.title %>
+                  </a>
+                </h3>
+                <p><strong>Author:</strong> <%= book.author %></p>
+                <p><strong>Date Read:</strong> <%= book.date_read %></p>
+                <p><strong>Rating:</strong> <%= book.rating %> / 5</p>
+                <p>
+                  <a href="/books/<%= user.username %>/<%= book.id %>">
+                    <strong>Open_note</strong>
+                  </a>
+                </p>
+              </div>
+            </div>
+
+            <!-- Bottom: Description -->
+            <div class="mt-3">
+              <strong>Description:</strong>
+              <p><%= book.description %></p>
+            </div>
+          </div>
+        <% }) %>
+      <% } %>
+    </div>
+  </div>
+<% } else { %>
+  <h1>Go and Register first</h1>
+<% } %>
+
+
+
+
+
+
+
+
